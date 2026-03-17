@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lekhika — Writing OS</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<link rel="stylesheet" href="styles.css">
+
+<style>
+body { overflow: hidden; }
+.glass {
+  backdrop-filter: blur(20px);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.sync-scroll { scroll-behavior: smooth; }
+</style>
+</head>
+
+<body class="bg-black text-white">
+
+<div class="flex h-screen">
+
+<!-- SIDEBAR -->
+<div id="sidebar" class="w-64 bg-black/80 border-r border-gray-800 p-4">
+
+<h2 class="text-lg mb-4">📊 Document</h2>
+
+<p>Words: <span id="wordCount">0</span></p>
+<p>Chars: <span id="charCount">0</span></p>
+<p>Reading: <span id="readTime">0</span></p>
+
+<hr class="my-4 border-gray-700">
+
+<select id="themeSwitcher" class="w-full bg-gray-900 p-2 rounded">
+<option value="theme-vedic">Vedic</option>
+<option value="theme-cyber">Cyber</option>
+<option value="theme-swiss">Swiss</option>
+</select>
+
+</div>
+
+<!-- MAIN -->
+<div class="flex-1 flex flex-col">
+
+<div class="p-4 border-b border-gray-800 flex justify-between">
+<span>Lekhika ✦</span>
+<span>Auto-saved</span>
+</div>
+
+<div class="glass fixed top-20 left-1/2 -translate-x-1/2 px-4 py-2 rounded-xl flex gap-3 z-50">
+<button onclick="wrap('**')">Bold</button>
+<button onclick="wrap('*')">Italic</button>
+<button onclick="insertMath()">Math</button>
+<button onclick="exportPDF()">PDF</button>
+</div>
+
+<div class="flex flex-1 overflow-hidden">
+
+<textarea id="editor"
+class="w-1/2 h-full p-6 bg-gray-950 text-green-400 resize-none outline-none"></textarea>
+
+<div id="preview"
+class="w-1/2 h-full p-6 overflow-auto theme-vedic"></div>
+
+</div>
+
+</div>
+</div>
+
+<script src="editor.js"></script>
+<script src="features.js"></script>
+
+</body>
+</html>

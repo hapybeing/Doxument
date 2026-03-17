@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lekhika — Writing OS</title>
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Prism -->
+<link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-tomorrow.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+
+<!-- Marked -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<!-- MathJax -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<!-- html2pdf -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<!-- Custom Styles -->
+<link rel="stylesheet" href="styles.css">
+
+<style>
+body {
+  overflow: hidden;
+}
+
+/* glassmorphism */
+.glass {
+  backdrop-filter: blur(20px);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* smooth scroll */
+.sync-scroll {
+  scroll-behavior: smooth;
+}
+
+/* scrollbar (premium feel) */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
+}
+</style>
+</head>
+
+<body class="bg-black text-white">
+
+<div class="flex h-screen">
+
+<!-- SIDEBAR -->
+<div id="sidebar" class="w-64 bg-black/80 border-r border-gray-800 p-4 flex flex-col justify-between transition-all">
+
+<div>
+<h2 class="text-lg font-semibold mb-4">📊 Document</h2>
+
+<div class="space-y-2 text-sm opacity-80">
+<p>Words: <span id="wordCount">0</span></p>
+<p>Chars: <span id="charCount">0</span></p>
+<p>Reading: <span id="readTime">0 min</span></p>
+</div>
+
+<hr class="my-4 border-gray-700">
+
+<h2 class="text-lg font-semibold mb-2">🎨 Theme</h2>
+<select id="themeSwitcher" class="w-full bg-gray-900 p-2 rounded">
+<option value="theme-vedic">Vedic Minimal</option>
+<option value="theme-cyber">Cyberpunk Stealth</option>
+<option value="theme-swiss">Modern Swiss</option>
+</select>
+</div>
+
+<button id="toggleSidebar" class="text-xs opacity-60 hover:opacity-100">
+Toggle Sidebar
+</button>
+
+</div>
+
+<!-- MAIN -->
+<div class="flex-1 flex flex-col relative">
+
+<!-- TOP BAR -->
+<div class="flex items-center justify-between px-6 py-3 border-b border-gray-800">
+
+<h1 class="text-lg font-semibold tracking-wide">
+Lekhika ✦
+</h1>
+
+<div class="flex gap-3 text-sm opacity-70">
+<span>Auto-saved</span>
+<span>•</span>
+<span>Markdown</span>
+</div>
+
+</div>
+
+<!-- FLOATING TOOLBAR -->
+<div class="glass fixed top-20 left-1/2 -translate-x-1/2 px-4 py-2 rounded-xl flex gap-4 z-50">
+
+<button onclick="wrap('**')" class="hover:scale-110">Bold</button>
+<button onclick="wrap('*')" class="hover:scale-110">Italic</button>
+<button onclick="insertMath()" class="hover:scale-110">Math</button>
+<button onclick="exportPDF()" class="hover:scale-110">PDF</button>
+
+</div>
+
+<!-- WORKSPACE -->
+<div class="flex flex-1 overflow-hidden">
+
+<!-- EDITOR -->
+<div class="w-1/2 h-full border-r border-gray-800 relative">
+
+<textarea id="editor"
+class="w-full h-full p-6 bg-gray-950 text-green-400 resize-none outline-none sync-scroll"
+spellcheck="false"></textarea>
+
+</div>
+
+<!-- PREVIEW -->
+<div id="preview"
+class="w-1/2 h-full p-8 overflow-auto sync-scroll theme-vedic">
+</div>
+
+</div>
+
+</div>
+</div>
+
+<!-- SCRIPTS -->
+<script src="editor.js"></script>
+<script src="features.js"></script>
+
+</body>
+</html>
